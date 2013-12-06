@@ -3,6 +3,7 @@ package Alien::bz2;
 use strict;
 use warnings;
 use base qw( Alien::Base );
+use Text::ParseWords qw( shellwords );
 use File::ShareDir qw( dist_dir );
 
 # ABSTRACT: Build and make available libbz2

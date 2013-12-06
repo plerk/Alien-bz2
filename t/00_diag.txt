@@ -1,3 +1,5 @@
 Alien::Base
 File::ShareDir
+File::Which
 Test::More
+Text::ParseWords
