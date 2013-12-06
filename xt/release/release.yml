@@ -11,3 +11,4 @@ pod_coverage:
   private:
     - Alien::bz2#libs
     - Alien::bz2#cflags
+    - Alien::bz2#dll_path
