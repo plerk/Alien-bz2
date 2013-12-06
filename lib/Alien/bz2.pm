@@ -82,8 +82,8 @@ sub import
 
 =head1 BUNDLED SOFTWARE
 
- This distribution comes with bzip2, by Julian Seward with the
- following license:
+This distribution comes with bzip2, by Julian Seward with the
+following license:
  
  This program, "bzip2", the associated library "libbzip2", and all
  documentation, are copyright (C) 1996-2010 Julian R Seward.  All
