@@ -1,4 +1,6 @@
 Alien::Base
 File::ShareDir
 File::Spec
+File::Which
 Test::More
+Text::ParseWords
