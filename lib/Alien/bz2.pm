@@ -53,7 +53,7 @@ Unless you have specific need for this, you probably want L<Compress::Bzip2>.
 
 =cut
 
-sub cflags   { '-I' . shift->dist_dir, 'include')        }
+sub cflags   { '-I' . File::Spec->catdir(shift->dist_dir, 'include')        }
 sub libs     { '-L' . File::Spec->catdir(shift->dist_dir, 'lib') . ' -lbz2' }
 sub dll_path { File::Spec->catfile(shift->dist_dir, qw( bin bz2.dll ))      }
 
