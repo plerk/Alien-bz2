@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use base qw( Alien::Base );
 use Text::ParseWords qw( shellwords );
-use File::ShareDir qw( dist_dir );
 use File::Spec;
 
 # ABSTRACT: Build and make available libbz2
@@ -54,9 +53,9 @@ Unless you have specific need for this, you probably want L<Compress::Bzip2>.
 
 =cut
 
-sub cflags   { '-I' . File::Spec->catdir(dist_dir('Alien-bz2'), 'include')        }
-sub libs     { '-L' . File::Spec->catdir(dist_dir('Alien-bz2'), 'lib') . ' -lbz2' }
-sub dll_path { File::Spec->catfile(dist_dir('Alien-bz2'), qw( bin bz2.dll ))      }
+sub cflags   { '-I' . shift->dist_dir, 'include')        }
+sub libs     { '-L' . File::Spec->catdir(shift->dist_dir, 'lib') . ' -lbz2' }
+sub dll_path { File::Spec->catfile(shift->dist_dir, qw( bin bz2.dll ))      }
 
 # workaround for Alien::Base gh#30
 sub import
@@ -72,7 +71,7 @@ sub import
   
   if($^O eq 'MSWin32')
   {
-    $ENV{PATH} = dist_dir("Alien-bz2") . "\\bin;$ENV{PATH}";
+    $ENV{PATH} = shift->dist_dir . "\\bin;$ENV{PATH}";
   }
   
   $class->SUPER::import(@_);
