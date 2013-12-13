@@ -12,6 +12,8 @@ sub new
 
   $args{alien_repository}->{location} = File::Spec->catdir(qw( src win ))
     if $^O eq 'MSWin32';
+
+  push @{ $args{requires} }, qw( Alien::MSYS Alien::o2dll ) if $^O eq 'MSWin32';
   
   $class->SUPER::new(%args);
 }
