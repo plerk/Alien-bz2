@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use base qw( Alien::Base::ModuleBuild );
 use File::Spec;
+use File::Path qw( mkpath );
+use File::Spec qw( copy );
 
 sub new
 {
@@ -13,7 +15,10 @@ sub new
   $args{alien_repository}->{location} = File::Spec->catdir(qw( src win ))
     if $^O eq 'MSWin32';
 
-  push @{ $args{requires} }, qw( Alien::MSYS Alien::o2dll ) if $^O eq 'MSWin32';
+  if($^O eq 'MSWin32')
+  {
+    $args{requires}->{$_} = 0 for qw( Alien::MSYS Alien::o2dll );
+  }
   
   $class->SUPER::new(%args);
 }
@@ -84,7 +89,13 @@ sub alien_install
     eval q{ require Alien::MSYS };
     die $@ if $@;
     Alien::MSYS::msys(sub {
+      print "dir = $dir\n";
+      $dir =~ s/\\/\//g;
+      print "dir = $dir\n";
+      print "% make install PREFIX=$dir\n";
       _system 'make', 'install', "PREFIX=$dir";
+      unlink(File::Spec->catfile($dir, 'lib', 'libbz2.a'));
+      copy('libbz2.dll.a', File::Spec->catfile($dir, 'lib', 'libbz2.dll.a'));
     });
   }
   else
