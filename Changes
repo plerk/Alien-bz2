@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.04      2013-12-13 16:46:11 -0500
+  - First CPAN release
+
 0.03      2013-12-13 16:17:17 -0500
   - MSWin32 install support (oops)
 
