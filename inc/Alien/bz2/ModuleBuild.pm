@@ -45,10 +45,24 @@ sub alien_build
 
   if($^O eq 'MSWin32')
   {
-    my $dir = File::Spec->catdir(File::Spec->updir, File::Spec->updir);
-    print "% copy " . File::Spec->catfile($dir, 'Makefile-windll'), ' Makefile-windll', "\n";
-    copy(File::Spec->catfile($dir, 'Makefile-windll'), 'Makefile-windll');
-    _system $make, -f => 'Makefile-windll';
+    do {
+      open my $fh, '<', 'Makefile';
+      my $makefile = do { local $/; <$fh> }; 
+      close $fh;
+      
+      $makefile =~ s/\to2dll/\tpo2dll/g;
+      
+      open $fh, '>', 'Makefile';
+      print $fh $makefile;
+      close $fh;
+    };
+    
+    eval q{ require Alien::MSYS };
+    die $@ if $@;
+    Alien::MSYS::msys(sub {
+      _system 'make', 'all';
+    });
+    unlink 'libbz2.a';
   }
   else
   {
@@ -65,12 +79,11 @@ sub alien_install
   my $dir = shift @ARGV;
   if($^O eq 'MSWin32')
   {
-    mkdir "$dir/bin";
-    mkdir "$dir/lib";
-    mkdir "$dir/include";
-    copy 'bz2.dll', "$dir\\bin";
-    copy 'libbz2.a', "$dir\\lib";
-    copy 'bzlib.h', "$dir\\include";
+    eval q{ require Alien::MSYS };
+    die $@ if $@;
+    Alien::MSYS::msys(sub {
+      _system 'make', 'install', "PREFIX=$dir";
+    });
   }
   else
   {

@@ -53,23 +53,19 @@ Unless you have specific need for this, you probably want L<Compress::Bzip2>.
 
 =cut
 
-sub cflags
+sub _dir
 {
-  my $class = shift;
+  my($class,$dir) = @_;
   if($class->config('finished_installing'))
-  { '-I' . File::Spec->catdir($class->dist_dir, 'include') }
+  { $dir = File::Spec->catdir($class->dist_dir, 'include') }
   else
-  { '-I' . File::Spec->catdir($class->dist_dir) }
+  { $dir = File::Spec->catdir($class->dist_dir) }
+  $dir =~ s/\\/\//g if $^O eq 'MSWin32';
+  $dir;
 }
 
-sub libs
-{
-  my $class = shift;
-  if($class->config('finished_installing'))
-  { '-L' . File::Spec->catdir($class->dist_dir, 'lib') . ' -lbz2' }
-  else
-  { '-L' . File::Spec->catdir($class->dist_dir) . ' -lbz2' }
-}
+sub cflags { '-I' . _dir(shift, 'include') }
+sub libs { '-L' . _dir(shift, 'lib') . ' -lbz2' }
 
 # workaround for Alien::Base gh#30
 sub import
@@ -85,7 +81,7 @@ sub import
   
   if($^O eq 'MSWin32')
   {
-    $ENV{PATH} = shift->dist_dir . "\\bin;$ENV{PATH}";
+    $ENV{PATH} = $class->dist_dir . "\\bin;$ENV{PATH}";
   }
   
   $class->SUPER::import(@_);
