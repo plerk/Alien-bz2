@@ -1,6 +1,8 @@
 language: perl
 
 install:
+  - sudo apt-get update
+  - sudo apt-get install bsdtar
   - cpanm -n Dist::Zilla
   - dzil authordeps --missing | cpanm -n
   - cpanm -n Alien::Base File::ShareDir File::Which Test::CChecker Text::ParseWords
