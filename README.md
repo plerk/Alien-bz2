@@ -1,4 +1,4 @@
-# Alien::bz2
+# Alien::bz2 [![Build Status](https://secure.travis-ci.org/plicease/Alien-bz2.png)](http://travis-ci.org/plicease/Alien-bz2)
 
 Build and make available libbz2
 
