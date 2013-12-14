@@ -4,6 +4,7 @@ install:
   - cpanm -n Dist::Zilla
   - dzil authordeps --missing | cpanm -n
   - cpanm -n Alien::Base File::ShareDir File::Which Test::CChecker Text::ParseWords
+  - cpanm -n Dist::Zilla::Plugin::Alien
 
 perl:
   - "5.8"
