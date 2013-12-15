@@ -2,7 +2,6 @@ Alien::Base
 File::ShareDir
 File::Spec
 File::Which
-Path::Class
 Test::CChecker
 Test::More
 Text::ParseWords
