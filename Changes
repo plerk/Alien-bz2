@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Testing tweaks and additional diagnostic
 
 0.04      2013-12-13 16:46:11 -0500
   - First CPAN release
