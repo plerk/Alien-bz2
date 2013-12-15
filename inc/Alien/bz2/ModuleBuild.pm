@@ -12,12 +12,10 @@ sub new
   my $class = shift;
   my %args = @_;
 
-  $args{alien_repository}->{location} = File::Spec->catdir(qw( src win ))
-    if $^O eq 'MSWin32';
-
   if($^O eq 'MSWin32')
   {
     $args{requires}->{$_} = 0 for qw( Alien::MSYS Alien::o2dll );
+    $args{alien_repository}->{location} = File::Spec->catdir(qw( src win ));
   }
   
   $class->SUPER::new(%args);
@@ -57,10 +55,15 @@ sub alien_build
       my $makefile = do { local $/; <$fh> }; 
       close $fh;
       
-      $makefile =~ s/\to2dll/\tpo2dll/g;
+      $makefile =~ s/\to2dll/\t$^X -MAlien::o2dll=o2dll o2dll.pl/g;
       
       open $fh, '>', 'Makefile';
       print $fh $makefile;
+      close $fh;
+      
+      open $fh, '>', 'o2dll.pl';
+      print $fh "use Alien::o2dll qw( o2dll );\n";
+      print $fh "o2dll(\@ARGV)\n";
       close $fh;
     };
     

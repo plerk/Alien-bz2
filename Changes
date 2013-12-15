@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - Testing tweaks and additional diagnostic
+  - MSWin32: Don't depend on po2dll, as that may not be in the PATH
+    (use a Perl wrapper around Alien::o2dll instead)
 
 0.04      2013-12-13 16:46:11 -0500
   - First CPAN release
