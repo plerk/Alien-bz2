@@ -79,10 +79,11 @@ sub import
       shellwords( $class->libs );
   }
   
-  if($^O eq 'MSWin32')
-  {
-    $ENV{PATH} = $class->dist_dir . "\\bin;$ENV{PATH}";
-  }
+  # TODO: this puts bzip2 executables in the PATH on just Windows,
+  # which is undesirable.  Better to have a dll directory and
+  # copy the dlls there during the install process
+  $ENV{PATH} = $class->dist_dir . "\\bin;$ENV{PATH}" if $^O eq 'MSWin32';
+  $ENV{PATH} = $class->dist_dir . "/bin;$ENV{PATH}"  if $^O eq 'cygwin';
   
   $class->SUPER::import(@_);
 }
