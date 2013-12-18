@@ -57,7 +57,7 @@ sub _dir
 {
   my($class,$dir) = @_;
   if($class->config('finished_installing'))
-  { $dir = File::Spec->catdir($class->dist_dir, 'include') }
+  { $dir = File::Spec->catdir($class->dist_dir, $dir) }
   else
   { $dir = File::Spec->catdir($class->dist_dir) }
   $dir =~ s/\\/\//g if $^O eq 'MSWin32';
