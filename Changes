@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.06      2013-12-18 07:48:16 -0500
   - bugfix: was passing in include instead of lib dir to -L 
 
 0.05      2013-12-15 07:58:34 -0500
