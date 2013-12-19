@@ -5,6 +5,13 @@ use Test::CChecker;
 use Alien::bz2;
 use Env qw( @LD_LIBRARY_PATH );
 
+diag '';
+diag '';
+diag 'CFLAGS: ' . Alien::bz2->cflags;
+diag 'LIBS:   ' . Alien::bz2->libs;
+diag '';
+diag '';
+
 compile_with_alien 'Alien::bz2';
 
 compile_output_to_note;

@@ -1,4 +1,6 @@
 Alien::Base
+Capture::Tiny
+ExtUtils::CChecker
 File::ShareDir
 File::Spec
 File::Which

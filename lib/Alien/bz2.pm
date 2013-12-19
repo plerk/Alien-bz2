@@ -55,17 +55,18 @@ Unless you have specific need for this, you probably want L<Compress::Bzip2>.
 
 sub _dir
 {
-  my($class,$dir) = @_;
+  my($class, $flag, $dir) = @_;
+  return () if $class->install_type('system');
   if($class->config('finished_installing'))
   { $dir = File::Spec->catdir($class->dist_dir, $dir) }
   else
   { $dir = File::Spec->catdir($class->dist_dir) }
   $dir =~ s/\\/\//g if $^O eq 'MSWin32';
-  $dir;
+  ("$flag$dir");
 }
 
-sub cflags { '-I' . _dir(shift, 'include') }
-sub libs { '-L' . _dir(shift, 'lib') . ' -lbz2' }
+sub cflags { join ' ', _dir(shift, -I => 'include')          }
+sub libs   { join ' ', _dir(shift, -L => 'lib'),    ' -lbz2' }
 
 # workaround for Alien::Base gh#30
 sub import

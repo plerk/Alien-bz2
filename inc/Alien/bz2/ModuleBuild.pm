@@ -21,6 +21,39 @@ sub new
   $class->SUPER::new(%args);
 }
 
+sub alien_check_installed_version
+{
+  my($self) = @_;
+  
+  return if ($ENV{ALIEN_BZ2}||'') eq 'share';
+  
+  require ExtUtils::CChecker;
+  require Capture::Tiny;
+  
+  my $cc = ExtUtils::CChecker->new;
+  $cc->push_extra_linker_flags('-larchive');
+  
+  my $ok;
+  my $out = Capture::Tiny::capture_merged(sub {
+    $ok = $cc->try_compile_run(
+      join "\n", 
+        '#include <bzlib.h>',
+        'int main(int argc, char *argv[])',
+        '{',
+        '  printf("version = \"%s\"\n", BZ2_bzlibVersion());',
+        '  return 0;',
+        '}',
+        ''
+    );
+  });
+  
+  return $1 if $ok && $out =~ /version = "(.*?)"/;
+  
+  print "\n\n[out]\n$out\n\n";
+  
+  return;
+}
+
 package
   main;
 
