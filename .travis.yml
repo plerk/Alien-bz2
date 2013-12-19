@@ -2,7 +2,7 @@ language: perl
 
 install:
   - sudo apt-get update
-  - sudo apt-get install libbz2-dev
+  - sudo apt-get install libbz2-dev bsdtar
   - cpanm -n Dist::Zilla
   - dzil authordeps --missing | cpanm -n
   - cpanm -n Alien::Base File::ShareDir File::Which Test::CChecker Text::ParseWords
