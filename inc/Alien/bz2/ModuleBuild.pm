@@ -31,7 +31,7 @@ sub alien_check_installed_version
   require Capture::Tiny;
   
   my $cc = ExtUtils::CChecker->new;
-  $cc->push_extra_linker_flags('-larchive');
+  $cc->push_extra_linker_flags('-lbz2');
   
   my $ok;
   my $out = Capture::Tiny::capture_merged(sub {
