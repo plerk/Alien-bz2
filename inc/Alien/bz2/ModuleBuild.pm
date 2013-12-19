@@ -139,7 +139,10 @@ sub alien_install
   else
   {
     _system $make, 'install', "PREFIX=$dir";
-    _system $cp, '-a', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
+    eval {
+      _system $cp, '-a', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
+      1;
+    } || _system $cp, '-p', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
   }
 }
 
