@@ -30,6 +30,8 @@ use File::Copy qw( copy );
 use File::Spec;
 use File::Path qw( mkpath );
 use FindBin ();
+use Env qw( @LD_LIBRARY_PATH );
+use Cwd qw( getcwd );
 
 my $make = which($Config{gmake}) || which($Config{make}) || 'make';
 my $cp   = which($Config{cp});
@@ -76,6 +78,8 @@ sub alien_build
   }
   else
   {
+    push @LD_LIBRARY_PATH, getcwd(); # for OpenBSD
+    print "LD_LIBRARY_PATH = $ENV{LD_LIBRARY_PATH}\n";
     _system $make, -f => 'Makefile-libbz2_so';
     _system $make, 'all';
   }
