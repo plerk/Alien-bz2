@@ -48,8 +48,26 @@ FFI
 =head1 DESCRIPTION
 
 This distribution installs the bzip2 libraries and makes them available L<Alien::Base> style.
+It will use the system version of libbz2 if found.  You can force it to build libbz2 from
+source by setting the environment variable C<ALIEN_BZ2> to C<share> when you install this
+module.
 
-Unless you have specific need for this, you probably want L<Compress::Bzip2>.
+Unless you have specific need for this, you probably are more interested in one of these:
+
+=over 4
+
+=item L<Compress::Bzip2>
+
+=item L<Compress::Raw::Bzip2>
+
+=item L<IO::Compress::Bzip2>
+
+=back
+
+=head1 CAVEATS
+
+Does not seem to work with 64bit Strawberry Perl on Windows.  This is because we borrow the
+sources from GnuWin32, which appear to be hand crafted to build 32bit binaries.
 
 =cut
 
