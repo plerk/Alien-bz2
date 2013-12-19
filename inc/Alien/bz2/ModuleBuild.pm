@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use base qw( Alien::Base::ModuleBuild );
 use File::Spec;
-use File::Path qw( mkpath );
-use File::Spec qw( copy );
 
 sub new
 {
