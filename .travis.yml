@@ -2,7 +2,7 @@ language: perl
 
 install:
   - sudo apt-get update
-  - sudo apt-get install bsdtar
+  - sudo apt-get install libbz2-dev
   - cpanm -n Dist::Zilla
   - dzil authordeps --missing | cpanm -n
   - cpanm -n Alien::Base File::ShareDir File::Which Test::CChecker Text::ParseWords
@@ -18,8 +18,8 @@ perl:
   - "5.18"
   - "5.19"
 
-#before_script: /bin/true
-
 script: dzil test -v
 
-#after_script: /bin/true
+env:
+  - ALIEN_BZ2=share
+  - ALIEN_BZ2=system
