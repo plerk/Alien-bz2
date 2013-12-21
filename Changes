@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.09      2013-12-21 07:31:15 -0500
   - use -p option instead of -a if that seems to fail (gh#5)
 
 0.08      2013-12-19 15:04:50 -0500
