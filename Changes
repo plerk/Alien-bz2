@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - fix wrong path separator for Cygwin
 
 0.09      2013-12-21 07:31:15 -0500
   - use -p option instead of -a if that seems to fail (gh#5)
