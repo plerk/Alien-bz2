@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.10      2013-12-28 11:45:07 -0500
   - fix wrong path separator for Cygwin
 
 0.09      2013-12-21 07:31:15 -0500
