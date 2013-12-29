@@ -102,7 +102,7 @@ sub import
   # which is undesirable.  Better to have a dll directory and
   # copy the dlls there during the install process
   $ENV{PATH} = $class->dist_dir . "\\bin;$ENV{PATH}" if $^O eq 'MSWin32';
-  $ENV{PATH} = $class->dist_dir . "/bin;$ENV{PATH}"  if $^O eq 'cygwin';
+  $ENV{PATH} = $class->dist_dir . "/bin:$ENV{PATH}"  if $^O eq 'cygwin';
   
   $class->SUPER::import(@_);
 }
