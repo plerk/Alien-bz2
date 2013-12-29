@@ -1,0 +1,35 @@
+sub plugin ($)     {}
+sub system_lib (&) {}
+sub fetch_file (&) {}
+sub set ($$) {}
+sub build (&) {}
+sub make (@) {}
+sub compile_test_c (@) {}
+
+plugin 'make';
+plugin 'o2dll' if $^O eq 'MSWin32';
+plugin 'msys'  if $^O eq 'MSWin32';
+
+system_lib {
+  set lib_name => 'bz2';
+};
+
+fetch_file {
+  set url  => $^O eq 'MSWin32' ? "src/win" : "src/unix";
+  set name => 'bzip2';
+  
+  build {
+    make -f => 'Makefile-libbz2_so' if $^O ne 'MSWin32';
+    make 'all';
+    make 'install', 'DESTDIR=${DESTDIR}'
+  };
+};
+
+compile_test_c <<EOF;
+#include <bzlib.h>
+int main(int argc, char *argv[])
+{
+  printf("version = \"%s\"\n", BZ2_bzlibVersion());
+  return 0;
+}
+EOF
