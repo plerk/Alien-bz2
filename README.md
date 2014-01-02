@@ -41,8 +41,20 @@ FFI
 # DESCRIPTION
 
 This distribution installs the bzip2 libraries and makes them available [Alien::Base](https://metacpan.org/pod/Alien::Base) style.
+It will use the system version of libbz2 if found.  You can force it to build libbz2 from
+source by setting the environment variable `ALIEN_BZ2` to `share` when you install this
+module.
 
-Unless you have specific need for this, you probably want [Compress::Bzip2](https://metacpan.org/pod/Compress::Bzip2).
+Unless you have specific need for this, you probably are more interested in one of these:
+
+- [Compress::Bzip2](https://metacpan.org/pod/Compress::Bzip2)
+- [Compress::Raw::Bzip2](https://metacpan.org/pod/Compress::Raw::Bzip2)
+- [IO::Compress::Bzip2](https://metacpan.org/pod/IO::Compress::Bzip2)
+
+# CAVEATS
+
+Does not seem to work with 64bit Strawberry Perl on Windows.  This is because we borrow the
+sources from GnuWin32, which appear to be hand crafted to build 32bit binaries.
 
 # BUNDLED SOFTWARE
 

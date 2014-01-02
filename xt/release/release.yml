@@ -6,6 +6,7 @@ pod_spelling_system:
     - libbz2
     - bzip
     - FFI
+    - GnuWin
 
 pod_coverage:
   # format is "Class#method" or "Class", regex allowed

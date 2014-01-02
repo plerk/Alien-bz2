@@ -4,8 +4,6 @@ use strict;
 use warnings;
 use base qw( Alien::Base::ModuleBuild );
 use File::Spec;
-use File::Path qw( mkpath );
-use File::Spec qw( copy );
 
 sub new
 {
@@ -39,7 +37,7 @@ sub alien_check_installed_version
   require Capture::Tiny;
   
   my $cc = ExtUtils::CChecker->new;
-  $cc->push_extra_linker_flags('-larchive');
+  $cc->push_extra_linker_flags('-lbz2');
   
   my $ok;
   my $out = Capture::Tiny::capture_merged(sub {
@@ -149,7 +147,10 @@ sub alien_install
   else
   {
     _system $make, 'install', "PREFIX=$dir";
-    _system $cp, '-a', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
+    eval {
+      _system $cp, '-a', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
+      1;
+    } || _system $cp, '-p', 'libbz2.so.1.0.6', 'libbz2.so.1.0', "$dir/lib";
   }
 }
 
