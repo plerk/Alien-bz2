@@ -4,11 +4,17 @@ use strict;
 use warnings;
 use base qw( Alien::Base::ModuleBuild );
 use File::Spec;
+use ExtUtils::CChecker;
 
 sub new
 {
   my $class = shift;
   my %args = @_;
+
+  ExtUtils::CChecker->new->assert_compile_run(
+    diag => 'c compiler',
+    source => 'int main(int argc, char *argv[]) { return 0; }'
+  );
 
   if($^O eq 'MSWin32')
   {
@@ -33,7 +39,6 @@ sub alien_check_installed_version
   
   return if ($ENV{ALIEN_BZ2}||'') eq 'share';
   
-  require ExtUtils::CChecker;
   require Capture::Tiny;
   
   my $cc = ExtUtils::CChecker->new;

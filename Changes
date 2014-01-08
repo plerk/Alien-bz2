@@ -2,6 +2,7 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
   - no support for 64bit Windows Perl
+  - no support for systems without a compiler (check at configure time)
 
 0.10      2013-12-28 11:45:07 -0500
   - fix wrong path separator for Cygwin
