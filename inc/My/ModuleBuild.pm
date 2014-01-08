@@ -1,4 +1,4 @@
-package Alien::bz2::ModuleBuild;
+package My::ModuleBuild;
 
 use strict;
 use warnings;
