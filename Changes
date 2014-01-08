@@ -1,7 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
-  - no support for 64bit Windows Perl
+
+0.11      2014-01-08 07:42:10 -0500 
+  - no support for source install on 64bit Windows Perl (check at configure time)
   - no support for systems without a compiler (check at configure time)
 
 0.10      2013-12-28 11:45:07 -0500
