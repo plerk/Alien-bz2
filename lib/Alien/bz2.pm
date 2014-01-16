@@ -2,6 +2,7 @@ package Alien::bz2;
 
 use strict;
 use warnings;
+use 5.008009;
 use base qw( Alien::Base );
 use Text::ParseWords qw( shellwords );
 use File::Spec;
