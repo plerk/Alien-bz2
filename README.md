@@ -1,4 +1,4 @@
-# Alien::bz2 [![Build Status](https://secure.travis-ci.org/plicease/Alien-bz2.png)](http://travis-ci.org/plicease/Alien-bz2)
+# Alien::bz2 [![Build Status](https://secure.travis-ci.org/plicease/Alien-bz21.png)](http://travis-ci.org/plicease/Alien-bz21)
 
 Build and make available libbz2
 
@@ -39,6 +39,11 @@ FFI
     ffi_lib(Alien::bz2->new->libs);
 
 # DESCRIPTION
+
+**NOTE**: This version of Alien::bz2 has been deprecated in favor
+of a re-write which is hosted here:
+
+- [https://github.com/plicease/Alien-bz22](https://github.com/plicease/Alien-bz22)
 
 This distribution installs the bzip2 libraries and makes them available [Alien::Base](https://metacpan.org/pod/Alien::Base) style.
 It will use the system version of libbz2 if found.  You can force it to build libbz2 from

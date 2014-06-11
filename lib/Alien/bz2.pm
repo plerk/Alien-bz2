@@ -48,6 +48,15 @@ FFI
 
 =head1 DESCRIPTION
 
+B<NOTE>: This version of Alien::bz2 has been deprecated in favor
+of a re-write which is hosted here:
+
+=over 4
+
+=item L<https://github.com/plicease/Alien-bz22>
+
+=back
+
 This distribution installs the bzip2 libraries and makes them available L<Alien::Base> style.
 It will use the system version of libbz2 if found.  You can force it to build libbz2 from
 source by setting the environment variable C<ALIEN_BZ2> to C<share> when you install this
